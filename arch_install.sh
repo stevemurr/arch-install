@@ -39,28 +39,28 @@
 ## ALSO LOOK AT THE install_packages FUNCTION TO SEE WHAT IS ACTUALLY INSTALLED
 
 # Drive to install to.
-DRIVE='/dev/sda'
+DRIVE='/dev/vda'
 
 # Hostname of the installed machine.
 HOSTNAME='host100'
 
 # Encrypt everything (except /boot).  Leave blank to disable.
-ENCRYPT_DRIVE='TRUE'
+ENCRYPT_DRIVE=''
 
 # Passphrase used to encrypt the drive (leave blank to be prompted).
-DRIVE_PASSPHRASE='a'
+DRIVE_PASSPHRASE=''
 
 # Root password (leave blank to be prompted).
-ROOT_PASSWORD='a'
+ROOT_PASSWORD='flag9012'
 
 # Main user to create (by default, added to wheel group, and others).
-USER_NAME='user'
+USER_NAME='murr'
 
 # The main user's password (leave blank to be prompted).
-USER_PASSWORD='a'
+USER_PASSWORD='flag9012'
 
 # System timezone.
-TIMEZONE='America/New_York'
+TIMEZONE='US/Pacific'
 
 # Have /tmp on a tmpfs or not.  Leave blank to disable.
 # Only leave this blank on systems with very little RAM.
@@ -71,16 +71,16 @@ KEYMAP='us'
 
 # Choose your video driver
 # For Intel
-VIDEO_DRIVER="i915"
+# VIDEO_DRIVER="i915"
 # For nVidia
-#VIDEO_DRIVER="nouveau"
+VIDEO_DRIVER="nvidia"
 # For ATI
 #VIDEO_DRIVER="radeon"
 # For generic stuff
 #VIDEO_DRIVER="vesa"
 
 # Wireless device, leave blank to not use wireless and use DHCP instead.
-WIRELESS_DEVICE="wlan0"
+# WIRELESS_DEVICE="wlan0"
 # For tc4200's
 #WIRELESS_DEVICE="eth1"
 
@@ -301,58 +301,58 @@ install_packages() {
     local packages=''
 
     # General utilities/libraries
-    packages+=' alsa-utils aspell-en chromium cpupower gvim mlocate net-tools ntp openssh p7zip pkgfile powertop python python2 rfkill rsync sudo unrar unzip wget zip systemd-sysvcompat zsh grml-zsh-config'
+    # packages+=' alsa-utils aspell-en chromium cpupower gvim mlocate net-tools ntp openssh p7zip pkgfile powertop python python2 rfkill rsync sudo unrar unzip wget zip systemd-sysvcompat zsh grml-zsh-config'
 
-    # Development packages
-    packages+=' apache-ant cmake gdb git maven mercurial subversion tcpdump valgrind wireshark-gtk'
+    # # Development packages
+    # packages+=' apache-ant cmake gdb git maven mercurial subversion tcpdump valgrind wireshark-gtk'
 
-    # Netcfg
-    if [ -n "$WIRELESS_DEVICE" ]
-    then
-        packages+=' netcfg ifplugd dialog wireless_tools wpa_actiond wpa_supplicant'
-    fi
+    # # Netcfg
+    # if [ -n "$WIRELESS_DEVICE" ]
+    # then
+    #     packages+=' netcfg ifplugd dialog wireless_tools wpa_actiond wpa_supplicant'
+    # fi
 
-    # Java stuff
-    packages+=' icedtea-web-java7 jdk7-openjdk jre7-openjdk'
+    # # Java stuff
+    # packages+=' icedtea-web-java7 jdk7-openjdk jre7-openjdk'
 
-    # Libreoffice
-    packages+=' libreoffice-calc libreoffice-en-US libreoffice-gnome libreoffice-impress libreoffice-writer hunspell-en hyphen-en mythes-en'
+    # # Libreoffice
+    # packages+=' libreoffice-calc libreoffice-en-US libreoffice-gnome libreoffice-impress libreoffice-writer hunspell-en hyphen-en mythes-en'
 
-    # Misc programs
-    packages+=' mplayer pidgin vlc xscreensaver gparted dosfstools ntfsprogs'
+    # # Misc programs
+    # packages+=' mplayer pidgin vlc xscreensaver gparted dosfstools ntfsprogs'
 
-    # Xserver
-    packages+=' xorg-apps xorg-server xorg-xinit xterm'
+    # # Xserver
+    # packages+=' xorg-apps xorg-server xorg-xinit xterm'
 
-    # Slim login manager
-    packages+=' slim archlinux-themes-slim'
+    # # Slim login manager
+    # packages+=' slim archlinux-themes-slim'
 
-    # Fonts
-    packages+=' ttf-dejavu ttf-liberation'
+    # # Fonts
+    # packages+=' ttf-dejavu ttf-liberation'
 
-    # On Intel processors
-    packages+=' intel-ucode'
+    # # On Intel processors
+    # packages+=' intel-ucode'
 
-    # For laptops
-    packages+=' xf86-input-synaptics'
+    # # For laptops
+    # packages+=' xf86-input-synaptics'
 
-    # Extra packages for tc4200 tablet
-    #packages+=' ipw2200-fw xf86-input-wacom'
+    # # Extra packages for tc4200 tablet
+    # #packages+=' ipw2200-fw xf86-input-wacom'
 
-    if [ "$VIDEO_DRIVER" = "i915" ]
-    then
-        packages+=' xf86-video-intel libva-intel-driver'
-    elif [ "$VIDEO_DRIVER" = "nouveau" ]
-    then
-        packages+=' xf86-video-nouveau'
-    elif [ "$VIDEO_DRIVER" = "radeon" ]
-    then
-        packages+=' xf86-video-ati'
-    elif [ "$VIDEO_DRIVER" = "vesa" ]
-    then
-        packages+=' xf86-video-vesa'
-    fi
-
+    # if [ "$VIDEO_DRIVER" = "i915" ]
+    # then
+    #     packages+=' xf86-video-intel libva-intel-driver'
+    # elif [ "$VIDEO_DRIVER" = "nouveau" ]
+    # then
+    #     packages+=' xf86-video-nouveau'
+    # elif [ "$VIDEO_DRIVER" = "radeon" ]
+    # then
+    #     packages+=' xf86-video-ati'
+    # elif [ "$VIDEO_DRIVER" = "vesa" ]
+    # then
+    #     packages+=' xf86-video-vesa'
+    # fi
+    packages+= ' docker nvidia'
     pacman -Sy --noconfirm $packages
 }
 
