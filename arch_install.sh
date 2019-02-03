@@ -145,10 +145,10 @@ configure() {
     install_packages
 
     echo 'Installing packer'
-    install_packer
+    # install_packer
 
     echo 'Installing AUR packages'
-    install_aur_packages
+    # install_aur_packages
 
     echo 'Clearing package tarballs'
     clean_packages
@@ -191,12 +191,6 @@ configure() {
 
     echo 'Configuring slim'
     set_slim
-
-    if [ -n "$WIRELESS_DEVICE" ]
-    then
-        echo 'Configuring netcfg'
-        set_netcfg
-    fi
 
     if [ -z "$ROOT_PASSWORD" ]
     then
