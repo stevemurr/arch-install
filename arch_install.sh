@@ -487,24 +487,6 @@ EOF
     mkinitcpio -p linux
 }
 
-set_daemons() {
-    local tmp_on_tmpfs="$1"; shift
-
-    systemctl enable cronie.service cpupower.service ntpd.service slim.service
-
-    if [ -n "$WIRELESS_DEVICE" ]
-    then
-        systemctl enable net-auto-wired.service net-auto-wireless.service
-    else
-        systemctl enable dhcpcd@eth0.service
-    fi
-
-    if [ -z "$tmp_on_tmpfs" ]
-    then
-        systemctl mask tmp.mount
-    fi
-}
-
 set_syslinux() {
     local lvm_dev="$1"; shift
 
