@@ -352,8 +352,7 @@ install_packages() {
     # then
     #     packages+=' xf86-video-vesa'
     # fi
-    packages+= ' docker nvidia'
-    pacman -Sy --noconfirm $packages
+    pacman -Sy --noconfirm docker nvidia
 }
 
 install_packer() {
