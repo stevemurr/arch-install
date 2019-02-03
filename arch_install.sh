@@ -162,9 +162,6 @@ configure() {
     echo 'Configuring initial ramdisk'
     set_initcpio
 
-    echo 'Setting initial daemons'
-    set_daemons "$TMP_ON_TMPFS"
-
     echo 'Configuring bootloader'
     set_syslinux "$lvm_dev"
 
