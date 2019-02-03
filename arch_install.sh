@@ -141,21 +141,6 @@ configure() {
     local boot_dev="$DRIVE"1
     local lvm_dev="$DRIVE"2
 
-    echo 'Installing additional packages'
-    install_packages
-
-    echo 'Installing packer'
-    # install_packer
-
-    echo 'Installing AUR packages'
-    # install_aur_packages
-
-    echo 'Clearing package tarballs'
-    clean_packages
-
-    echo 'Updating pkgfile database'
-    update_pkgfile
-
     echo 'Setting hostname'
     set_hostname "$HOSTNAME"
 
@@ -291,8 +276,8 @@ unmount_filesystems() {
     fi
 }
 
-install_packages() {
-    local packages=''
+# install_packages() {
+    # local packages=''
 
     # General utilities/libraries
     # packages+=' alsa-utils aspell-en chromium cpupower gvim mlocate net-tools ntp openssh p7zip pkgfile powertop python python2 rfkill rsync sudo unrar unzip wget zip systemd-sysvcompat zsh grml-zsh-config'
@@ -347,36 +332,29 @@ install_packages() {
     #     packages+=' xf86-video-vesa'
     # fi
     # pacman -Sy --noconfirm docker nvidia
-}
+# }
 
-install_packer() {
-    mkdir /foo
-    cd /foo
-    curl https://aur.archlinux.org/packages/pa/packer/packer.tar.gz | tar xzf -
-    cd packer
-    makepkg -si --noconfirm --asroot
+# install_packer() {
+#     mkdir /foo
+#     cd /foo
+#     curl https://aur.archlinux.org/packages/pa/packer/packer.tar.gz | tar xzf -
+#     cd packer
+#     makepkg -si --noconfirm --asroot
 
-    cd /
-    rm -rf /foo
-}
+#     cd /
+#     rm -rf /foo
+# }
 
-install_aur_packages() {
-    mkdir /foo
-    export TMPDIR=/foo
-    packer -S --noconfirm android-udev
-    packer -S --noconfirm chromium-pepper-flash-stable
-    packer -S --noconfirm chromium-libpdf-stable
-    unset TMPDIR
-    rm -rf /foo
-}
+# install_aur_packages() {
+#     mkdir /foo
+#     export TMPDIR=/foo
+#     packer -S --noconfirm android-udev
+#     packer -S --noconfirm chromium-pepper-flash-stable
+#     packer -S --noconfirm chromium-libpdf-stable
+#     unset TMPDIR
+#     rm -rf /foo
+# }
 
-clean_packages() {
-    yes | pacman -Scc
-}
-
-update_pkgfile() {
-    pkgfile -u
-}
 
 set_hostname() {
     local hostname="$1"; shift
