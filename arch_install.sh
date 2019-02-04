@@ -173,9 +173,6 @@ configure() {
     echo 'Creating initial user'
     create_user "$USER_NAME" "$USER_PASSWORD"
 
-    echo 'Building locate database'
-    update_locate
-
     rm /setup.sh
 }
 
@@ -717,12 +714,8 @@ create_user() {
     local name="$1"; shift
     local password="$1"; shift
 
-    useradd -m -s /bin/zsh -G adm,systemd-journal,wheel,rfkill,games,network,video,audio,optical,floppy,storage,scanner,power,adbusers,wireshark "$name"
+    useradd -m -s /bin/zsh "$name"
     echo -en "$password\n$password" | passwd "$name"
-}
-
-update_locate() {
-    updatedb
 }
 
 get_uuid() {
